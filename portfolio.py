@@ -22,6 +22,21 @@ def recorte_imagem_redonda(imagem_path):
     
     return img
 
+# Função para exibir os dados pessoais
+def exibir_dados_pessoais():
+    st.title("Dados Pessoais")
+    st.write("""
+    **Guilherme Henrique Damas dos Santos**  
+    Idade: 24 anos  
+    Nacionalidade: Brasileiro  
+    Estado Civil: Solteiro  
+    
+    **Endereço**: Rua São José do Rio Preto, Parque Gramado II, Araraquara - SP  
+    **Telefones**: (16) 99786-3751 / (16) 99628-4711  
+    **E-mail**: [guisant1003@gmail.com](mailto:guisant1003@gmail.com)  
+    **LinkedIn**: [Guilherme Henrique Damas dos Santos](https://linkedin.com/in/guilherme-henrique-damas-dos-santos-6b5543220)
+    """)
+
 # Função para exibir o currículo
 def exibir_curriculo():
     st.title("Currículo Profissional")
@@ -88,30 +103,9 @@ def exibir_experiencia():
 
     **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)
     - **Cargo**: Projetista Júnior
-    - Detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas Excel.
-    - Cálculos e verificações estruturais com **STRAP**, **Ftool** e **AutoLISP**.
-    - Acompanhamento de execução em campo, plotagem de projetos e resolução de dúvidas de execução.
-    """)
-
-# Função para exibir o portfólio de projetos
-def exibir_portfolio():
-    st.title("Portfólio de Projetos")
-    st.header("Projeto 1: Projeto de Estruturas Pré-Fabricadas")
-    st.write("""
-    Desenvolvimento de **projetos de estruturas pré-fabricadas** para a construção de edificações sustentáveis, utilizando **AutoCAD**, **Revit**, **STRAP** e **Ftool**.
-    Responsável pelo detalhamento estrutural, cálculos e supervisão de execução.
-    """)
-
-    st.header("Projeto 2: Gestão de Projetos Sustentáveis de Edificações")
-    st.write("""
-    Participação em projetos de **gestão sustentável** de edificações, otimizando o uso de recursos e aplicando práticas sustentáveis em toda a execução.
-    Utilização de **Revit** e **Dynamo para Revit** para parametrização e automação dos fluxos de trabalho.
-    """)
-
-    st.header("Projeto 3: Acompanhamento de Obras e Execução de Projetos")
-    st.write("""
-    Visitas técnicas a obras para **acompanhamento da execução dos projetos estruturais**. Resolução de problemas no canteiro de obras e implementação de soluções técnicas.
-    Colaboração com a equipe de campo para garantir a conformidade com os projetos aprovados.
+    - Realização de detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas **Excel**.
+    - Realização de cálculos e verificações com **STRAP**, **Ftool** e **AutoCAD (AutoLISP)**.
+    - Acompanhamento de execução em campo, plotagem de projetos e solução de dúvidas de execução.
     """)
 
 # Função principal
@@ -122,27 +116,21 @@ def main():
 
     # Menu lateral para navegação
     st.sidebar.title("Menu de Navegação")
-    menu = st.sidebar.radio("Escolha uma seção", 
-                            ("Resumo das Qualificações", 
-                             "Objetivo Profissional", 
-                             "Formação Acadêmica", 
-                             "Conhecimentos e Habilidades", 
-                             "Experiência Profissional", 
-                             "Portfólio de Projetos"))
+    menu = st.sidebar.radio("Escolha uma seção", ("Dados Pessoais", "Currículo", "Objetivo", "Formação", "Conhecimentos", "Experiência"))
 
     # Exibe a seção de acordo com a escolha do menu
-    if menu == "Resumo das Qualificações":
+    if menu == "Dados Pessoais":
+        exibir_dados_pessoais()
+    elif menu == "Currículo":
         exibir_curriculo()
-    elif menu == "Objetivo Profissional":
+    elif menu == "Objetivo":
         exibir_objetivo()
-    elif menu == "Formação Acadêmica":
+    elif menu == "Formação":
         exibir_formacao()
-    elif menu == "Conhecimentos e Habilidades":
+    elif menu == "Conhecimentos":
         exibir_conhecimentos()
-    elif menu == "Experiência Profissional":
+    elif menu == "Experiência":
         exibir_experiencia()
-    elif menu == "Portfólio de Projetos":
-        exibir_portfolio()
 
 # Executando o aplicativo
 if __name__ == "__main__":
