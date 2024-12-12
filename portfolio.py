@@ -90,10 +90,12 @@ def exibir_conhecimentos():
 def exibir_experiencia():
     st.title("Experiência Profissional")
     st.write("""
-    **HM ENGENHARIA** (01/2020 – 10/2020)
-    - **Cargo**: Estagiário
-    - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.
-    - Apoio com suprimentos, materiais e organização de documentos.
+    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)
+    - **Cargo**: Projetista Júnior
+    - Realização de detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas **Excel**.
+    - Realização de cálculos e verificações com **STRAP**, **Ftool** e **AutoCAD (AutoLISP)**.
+    - Acompanhamento de execução em campo, plotagem de projetos e solução de dúvidas de execução.
+    """)
     
     **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (10/2020 – 04/2022)
     - **Cargo**: Estagiário
@@ -101,12 +103,10 @@ def exibir_experiencia():
     - Acompanhamento de obras e visita à fábrica para conhecimento dos sistemas construtivos.
     - Aperfeiçoamento no uso do software **Revit**.
 
-    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)
-    - **Cargo**: Projetista Júnior
-    - Realização de detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas **Excel**.
-    - Realização de cálculos e verificações com **STRAP**, **Ftool** e **AutoCAD (AutoLISP)**.
-    - Acompanhamento de execução em campo, plotagem de projetos e solução de dúvidas de execução.
-    """)
+    **HM ENGENHARIA** (01/2020 – 10/2020)
+    - **Cargo**: Estagiário
+    - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.
+    - Apoio com suprimentos, materiais e organização de documentos.
 
 # Função principal
 def main():
