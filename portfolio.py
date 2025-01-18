@@ -3,24 +3,28 @@ from PIL import Image, ImageDraw, ImageOps
 
 # Função para criar a imagem com bordas arredondadas (círculo perfeito)
 def recorte_imagem_redonda(imagem_path):
-    img = Image.open(imagem_path)
-    
-    # Garantindo que a imagem seja quadrada (tomando o menor lado)
-    largura, altura = img.size
-    tamanho = min(largura, altura)  # Pegamos o menor valor entre largura e altura para garantir o formato circular
+    try:
+        img = Image.open(imagem_path)
+        
+        # Garantindo que a imagem seja quadrada (tomando o menor lado)
+        largura, altura = img.size
+        tamanho = min(largura, altura)  # Pegamos o menor valor entre largura e altura para garantir o formato circular
 
-    # Redimensionando a imagem para ser quadrada
-    img = img.crop(((largura - tamanho) // 2, (altura - tamanho) // 2, (largura + tamanho) // 2, (altura + tamanho) // 2))
-    
-    # Criando uma máscara circular
-    mask = Image.new('L', (tamanho, tamanho), 0)
-    draw = ImageDraw.Draw(mask)
-    draw.ellipse((0, 0, tamanho, tamanho), fill=255)
-    
-    # Aplicando a máscara circular
-    img.putalpha(mask)  # Colocando a máscara circular na imagem
-    
-    return img
+        # Redimensionando a imagem para ser quadrada
+        img = img.crop(((largura - tamanho) // 2, (altura - tamanho) // 2, (largura + tamanho) // 2, (altura + tamanho) // 2))
+        
+        # Criando uma máscara circular
+        mask = Image.new('L', (tamanho, tamanho), 0)
+        draw = ImageDraw.Draw(mask)
+        draw.ellipse((0, 0, tamanho, tamanho), fill=255)
+        
+        # Aplicando a máscara circular
+        img.putalpha(mask)  # Colocando a máscara circular na imagem
+        
+        return img
+    except Exception as e:
+        st.error(f"Erro ao carregar a imagem: {e}")
+        return None
 
 # Função para exibir os dados pessoais
 def exibir_dados_pessoais():
@@ -89,30 +93,31 @@ def exibir_conhecimentos():
 # Função para exibir a experiência profissional
 def exibir_experiencia():
     st.title("Experiência Profissional")
-    st.write("""
-    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)
-    - **Cargo**: Projetista Júnior
-    - Realização de detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas **Excel**.
-    - Realização de cálculos e verificações com **STRAP**, **Ftool** e **AutoCAD (AutoLISP)**.
-    - Acompanhamento de execução em campo, plotagem de projetos e solução de dúvidas de execução.
-    """)
-    
-    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (10/2020 – 04/2022)
-    - **Cargo**: Estagiário
-    - Elaboração de projetos de **estruturas pré-fabricadas** e plotagens.
-    - Acompanhamento de obras e visita à fábrica para conhecimento dos sistemas construtivos.
-    - Aperfeiçoamento no uso do software **Revit**.
+    st.markdown("""
+    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)  
+    - **Cargo**: Projetista Júnior  
+      - Realização de detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas **Excel**.  
+      - Realização de cálculos e verificações com **STRAP**, **Ftool** e **AutoCAD (AutoLISP)**.  
+      - Acompanhamento de execução em campo, plotagem de projetos e solução de dúvidas de execução.  
 
-    **HM ENGENHARIA** (01/2020 – 10/2020)
-    - **Cargo**: Estagiário
-    - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.
-    - Apoio com suprimentos, materiais e organização de documentos.
+    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (10/2020 – 04/2022)  
+    - **Cargo**: Estagiário  
+      - Elaboração de projetos de **estruturas pré-fabricadas** e plotagens.  
+      - Acompanhamento de obras e visita à fábrica para conhecimento dos sistemas construtivos.  
+      - Aperfeiçoamento no uso do software **Revit**.  
+
+    **HM ENGENHARIA** (01/2020 – 10/2020)  
+    - **Cargo**: Estagiário  
+      - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.  
+      - Apoio com suprimentos, materiais e organização de documentos.  
+    """)
 
 # Função principal
 def main():
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
-    st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
+    if img:
+        st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
 
     # Menu lateral para navegação
     st.sidebar.title("Menu de Navegação")
