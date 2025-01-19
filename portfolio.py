@@ -45,7 +45,7 @@ def main():
             st.markdown(
                 f"""
                 <style>
-                body {{
+                [data-testid="stSidebar"] {{
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -56,7 +56,7 @@ def main():
                 unsafe_allow_html=True
             )
     except Exception as e:
-        st.error("Erro ao carregar a imagem de fundo principal.")
+        st.sidebar.error("Erro ao carregar a imagem de fundo principal.")
 
     # Adiciona a imagem de fundo ao menu lateral
     try:
