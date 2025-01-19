@@ -38,10 +38,11 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
-    # Adiciona a imagem de fundo à página inteira
+    # Carregar a imagem de fundo como base64
     try:
         bg_image_base64 = imagem_para_base64("fotomenu.jpg")
         if bg_image_base64:
+            # Definindo o background com a imagem em base64
             st.markdown(
                 f"""
                 <style>
@@ -49,11 +50,13 @@ def main():
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
-                    background-position: center;
+                    background-position: center center;
+                    height: 100vh;
                     margin: 0;
                     padding: 0;
-                    height: 100vh;
-                    overflow: hidden;
+                }}
+                .css-1v3fvcr {{
+                    padding: 0;
                 }}
                 </style>
                 """,
@@ -62,7 +65,7 @@ def main():
     except Exception as e:
         st.error("Erro ao carregar a imagem de fundo da página.")
 
-    # Exibe a imagem uma vez, na parte superior da barra lateral
+    # Exibe a imagem com recorte redondo na barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
     if img:
         st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
