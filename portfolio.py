@@ -60,7 +60,7 @@ def main():
 
     # Adiciona a imagem de fundo da tela principal
     try:
-        bg_image_base64_main = imagem_para_base64("fotoprincipal.jpg")
+        bg_image_base64_main = imagem_para_base64("fotoprincipal.jpg")  # Verifique o caminho da imagem
         if bg_image_base64_main:
             st.markdown(
                 f"""
@@ -70,6 +70,9 @@ def main():
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
                 }}
                 </style>
                 """,
