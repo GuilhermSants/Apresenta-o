@@ -122,14 +122,18 @@ def main():
     if img:
         st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
 
-    # Carregando a imagem para o fundo
+    # CSS para plano de fundo do menu lateral
     fotomenu = "fotomenu.jpg"  # Caminho da imagem de fundo
+
+    # Aplicar o CSS com imagem de fundo para a barra lateral
     st.markdown(
         f"""
         <style>
         .css-1d391kg {{
             background-image: url("{fotomenu}");
             background-size: cover;
+            background-position: center;
+            height: 100vh;
         }}
         </style>
         """, 
