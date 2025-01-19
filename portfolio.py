@@ -1,5 +1,6 @@
 import streamlit as st
 from PIL import Image, ImageDraw, ImageOps
+import base64
 
 # Função para criar a imagem com bordas arredondadas (círculo perfeito)
 def recorte_imagem_redonda(imagem_path):
@@ -26,6 +27,60 @@ def recorte_imagem_redonda(imagem_path):
         st.error(f"Erro ao carregar a imagem: {e}")
         return None
 
+# Função para converter uma imagem para base64
+def imagem_para_base64(caminho_imagem):
+    try:
+        with open(caminho_imagem, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode("utf-8")
+    except Exception as e:
+        st.error(f"Erro ao converter a imagem para base64: {e}")
+        return None
+
+# Função principal
+def main():
+    # Adiciona a imagem de fundo ao menu lateral
+    try:
+        bg_image_base64 = imagem_para_base64("fotomenu.jpg")
+        if bg_image_base64:
+            st.markdown(
+                f"""
+                <style>
+                [data-testid="stSidebar"] {{
+                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
+
+    # Exibe a imagem uma vez, na parte superior da barra lateral
+    img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
+    if img:
+        st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
+
+    # Menu lateral para navegação
+    st.sidebar.title("Menu de Navegação")
+    menu = st.sidebar.radio("Escolha uma seção", ("Dados Pessoais", "Currículo", "Objetivo", "Formação", "Conhecimentos", "Experiência"))
+
+    # Exibe a seção de acordo com a escolha do menu
+    if menu == "Dados Pessoais":
+        exibir_dados_pessoais()
+    elif menu == "Currículo":
+        exibir_curriculo()
+    elif menu == "Objetivo":
+        exibir_objetivo()
+    elif menu == "Formação":
+        exibir_formacao()
+    elif menu == "Conhecimentos":
+        exibir_conhecimentos()
+    elif menu == "Experiência":
+        exibir_experiencia()
+
 # Função para exibir os dados pessoais
 def exibir_dados_pessoais():
     st.title("Dados Pessoais")
@@ -34,7 +89,7 @@ def exibir_dados_pessoais():
     Idade: 24 anos  
     Nacionalidade: Brasileiro  
     Estado Civil: Solteiro  
-    
+
     **Endereço**: Rua São José do Rio Preto, Parque Gramado II, Araraquara - SP  
     **Telefones**: (16) 99786-3751 / (16) 99628-4711  
     **E-mail**: [guisant1003@gmail.com](mailto:guisant1003@gmail.com)  
@@ -114,53 +169,6 @@ def exibir_experiencia():
       - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.  
       - Apoio com suprimentos, materiais e organização de documentos.  
     """)
-
-# Função principal
-def main():
-    # Adiciona CSS para o fundo da tela principal e da barra superior
-    st.markdown(
-        """
-        <style>
-        /* Fundo da tela principal */
-        .stApp {
-            background: url("fotoprincipal.jpg");
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Fundo da barra superior */
-        header, .css-18e3th9 {
-            background: url("fotoprincipal.jpg");
-            background-size: cover;
-            background-position: center;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Exibe a imagem uma vez, na parte superior da barra lateral
-    img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
-    if img:
-        st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
-
-    # Menu lateral para navegação
-    st.sidebar.title("Menu de Navegação")
-    menu = st.sidebar.radio("Escolha uma seção", ("Dados Pessoais", "Currículo", "Objetivo", "Formação", "Conhecimentos", "Experiência"))
-
-    # Exibe a seção de acordo com a escolha do menu
-    if menu == "Dados Pessoais":
-        exibir_dados_pessoais()
-    elif menu == "Currículo":
-        exibir_curriculo()
-    elif menu == "Objetivo":
-        exibir_objetivo()
-    elif menu == "Formação":
-        exibir_formacao()
-    elif menu == "Conhecimentos":
-        exibir_conhecimentos()
-    elif menu == "Experiência":
-        exibir_experiencia()
 
 # Executando o aplicativo
 if __name__ == "__main__":
