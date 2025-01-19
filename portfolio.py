@@ -36,8 +36,35 @@ def imagem_para_base64(caminho_imagem):
         st.error(f"Erro ao converter a imagem para base64: {e}")
         return None
 
+# Função para exibir uma imagem de fundo
+def adicionar_fundo(imagem_path):
+    try:
+        bg_image_base64 = imagem_para_base64(imagem_path)
+        if bg_image_base64:
+            st.markdown(
+                f"""
+                <style>
+                body {{
+                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.error(f"Erro ao carregar a imagem de fundo: {e}")
+
 # Função principal
 def main():
+    # Adiciona a imagem de fundo à tela principal (seção)
+    adicionar_fundo("fotoprincipal.jpg")  # Imagem principal de fundo para todas as seções
+
     # Adiciona a imagem de fundo ao menu lateral
     try:
         bg_image_base64 = imagem_para_base64("fotomenu.jpg")
@@ -57,29 +84,6 @@ def main():
             )
     except Exception as e:
         st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
-
-    # Adiciona a imagem de fundo à tela principal (seção)
-    try:
-        bg_image_base64_main = imagem_para_base64("fotoprincipal.jpg")
-        if bg_image_base64_main:
-            st.markdown(
-                f"""
-                <style>
-                body {{
-                    background-image: url("data:image/jpeg;base64,{bg_image_base64_main}");
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    height: 100%;
-                    margin: 0;
-                    padding: 0;
-                }}
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-    except Exception as e:
-        st.error("Erro ao carregar a imagem de fundo da tela principal.")
 
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
