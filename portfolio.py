@@ -46,16 +46,13 @@ def main():
             st.markdown(
                 f"""
                 <style>
-                body {{
+                .reportview-container {{
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
-                    background-position: center center;
-                    height: 100vh;
+                    background-position: center;
+                    min-height: 100vh;
                     margin: 0;
-                    padding: 0;
-                }}
-                .css-1v3fvcr {{
                     padding: 0;
                 }}
                 </style>
