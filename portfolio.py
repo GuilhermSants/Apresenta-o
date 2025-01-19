@@ -36,20 +36,20 @@ def imagem_para_base64(caminho_imagem):
         st.error(f"Erro ao converter a imagem para base64: {e}")
         return None
 
-# Função para adicionar a imagem de fundo ao layout
+# Função para adicionar a imagem de fundo à página
 def adicionar_fundo():
     try:
-        # Fundo para a página principal
+        # Carrega a imagem de fundo para a página principal
         bg_image_base64 = imagem_para_base64("fotoprincipal.jpg")
         if bg_image_base64:
             st.markdown(
                 f"""
                 <style>
-                body {{
+                .css-ffhzg2 {{
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
-                    background-position: center center;
+                    background-position: center;
                     height: 100vh;
                     margin: 0;
                     padding: 0;
@@ -59,7 +59,7 @@ def adicionar_fundo():
                 unsafe_allow_html=True
             )
 
-        # Fundo para a barra lateral
+        # Carrega a imagem de fundo para a barra lateral
         bg_sidebar_base64 = imagem_para_base64("fotomenu.jpg")
         if bg_sidebar_base64:
             st.markdown(
@@ -69,7 +69,7 @@ def adicionar_fundo():
                     background-image: url("data:image/jpeg;base64,{bg_sidebar_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
-                    background-position: center center;
+                    background-position: center;
                 }}
                 </style>
                 """,
