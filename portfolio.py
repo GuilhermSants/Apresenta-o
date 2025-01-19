@@ -38,6 +38,26 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
+    # Adiciona a imagem de fundo à tela principal
+    try:
+        bg_image_base64 = imagem_para_base64("fotoprincipal.jpg")
+        if bg_image_base64:
+            st.markdown(
+                f"""
+                <style>
+                body {{
+                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.error("Erro ao carregar a imagem de fundo principal.")
+
     # Adiciona a imagem de fundo ao menu lateral
     try:
         bg_image_base64 = imagem_para_base64("fotomenu.jpg")
