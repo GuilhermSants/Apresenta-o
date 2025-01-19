@@ -38,33 +38,9 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
-    # Adiciona a imagem de fundo à barra superior
-    try:
-        top_bar_image_base64 = imagem_para_base64("barra_superior.jpg")  # Substitua pelo caminho correto da imagem
-        if top_bar_image_base64:
-            st.markdown(
-                f"""
-                <style>
-                div.block-container {{
-                    padding-top: 80px; /* Ajuste para evitar sobreposição de conteúdo */
-                }}
-                div[data-testid="stHeader"] {{
-                    background-image: url("data:image/jpeg;base64,{top_bar_image_base64}");
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    height: 80px; /* Ajuste a altura conforme necessário */
-                }}
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-    except Exception as e:
-        st.error("Erro ao carregar a imagem de fundo da barra superior.")
-
     # Adiciona a imagem de fundo à tela principal
     try:
-        bg_image_base64 = imagem_para_base64("fundo_principal.jpg")  # Substitua com o caminho correto da imagem
+        bg_image_base64 = imagem_para_base64("fotomenu.jpg")  # Substitua com o caminho correto da imagem
         if bg_image_base64:
             st.markdown(
                 f"""
