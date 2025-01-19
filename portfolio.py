@@ -36,10 +36,11 @@ def imagem_para_base64(caminho_imagem):
         st.error(f"Erro ao converter a imagem para base64: {e}")
         return None
 
-# Função para exibir uma imagem de fundo
-def adicionar_fundo(imagem_path):
+# Função para adicionar a imagem de fundo ao layout
+def adicionar_fundo():
     try:
-        bg_image_base64 = imagem_para_base64(imagem_path)
+        # Fundo para a tela principal
+        bg_image_base64 = imagem_para_base64("fotoprincipal.jpg")
         if bg_image_base64:
             st.markdown(
                 f"""
@@ -49,7 +50,7 @@ def adicionar_fundo(imagem_path):
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
-                    height: 100%;
+                    height: 100vh;
                     margin: 0;
                     padding: 0;
                 }}
@@ -57,23 +58,15 @@ def adicionar_fundo(imagem_path):
                 """,
                 unsafe_allow_html=True
             )
-    except Exception as e:
-        st.error(f"Erro ao carregar a imagem de fundo: {e}")
 
-# Função principal
-def main():
-    # Adiciona a imagem de fundo à tela principal (seção)
-    adicionar_fundo("fotoprincipal.jpg")  # Imagem principal de fundo para todas as seções
-
-    # Adiciona a imagem de fundo ao menu lateral
-    try:
-        bg_image_base64 = imagem_para_base64("fotomenu.jpg")
-        if bg_image_base64:
+        # Fundo para a barra lateral
+        bg_sidebar_base64 = imagem_para_base64("fotomenu.jpg")
+        if bg_sidebar_base64:
             st.markdown(
                 f"""
                 <style>
                 [data-testid="stSidebar"] {{
-                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
+                    background-image: url("data:image/jpeg;base64,{bg_sidebar_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -82,8 +75,14 @@ def main():
                 """,
                 unsafe_allow_html=True
             )
+
     except Exception as e:
-        st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
+        st.error(f"Erro ao carregar a imagem de fundo: {e}")
+
+# Função principal
+def main():
+    # Adiciona a imagem de fundo à página e à barra lateral
+    adicionar_fundo()
 
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
