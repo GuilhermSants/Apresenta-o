@@ -122,17 +122,9 @@ def main():
     if img:
         st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
 
-    # Aplicando a imagem de fundo do menu lateral
-    menu_bg = Image.open("fotomenu.jpg")  # Caminho da imagem de fundo
-    st.markdown(
-        f"""
-        <style>
-        .css-1d391kg {{
-            background-image: url("data:image/png;base64,{menu_bg.convert('RGB').tobytes().hex()}");
-            background-size: cover;
-        }}
-        </style>
-        """, unsafe_allow_html=True)
+    # Exibindo a imagem do fundo na parte superior da barra lateral
+    fotomenu = Image.open("fotomenu.jpg")  # Substitua pelo caminho correto da sua imagem de fundo
+    st.sidebar.image(fotomenu, use_column_width=True)
 
     # Menu lateral para navegação
     st.sidebar.title("Menu de Navegação")
