@@ -124,7 +124,7 @@ def main():
 
     # Exibindo a imagem do fundo na parte superior da barra lateral
     fotomenu = Image.open("fotomenu.jpg")  # Substitua pelo caminho correto da sua imagem de fundo
-    st.sidebar.image(fotomenu, use_column_width=True)
+    st.sidebar.image(fotomenu, use_container_width=True)  # Usando use_container_width
 
     # Menu lateral para navegação
     st.sidebar.title("Menu de Navegação")
