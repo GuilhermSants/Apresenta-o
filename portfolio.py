@@ -1,39 +1,29 @@
 import streamlit as st
 from PIL import Image, ImageDraw, ImageOps
-import base64
 
 # Função para criar a imagem com bordas arredondadas (círculo perfeito)
 def recorte_imagem_redonda(imagem_path):
     try:
         img = Image.open(imagem_path)
-        
+
         # Garantindo que a imagem seja quadrada (tomando o menor lado)
         largura, altura = img.size
         tamanho = min(largura, altura)  # Pegamos o menor valor entre largura e altura para garantir o formato circular
 
         # Redimensionando a imagem para ser quadrada
         img = img.crop(((largura - tamanho) // 2, (altura - tamanho) // 2, (largura + tamanho) // 2, (altura + tamanho) // 2))
-        
+
         # Criando uma máscara circular
         mask = Image.new('L', (tamanho, tamanho), 0)
         draw = ImageDraw.Draw(mask)
         draw.ellipse((0, 0, tamanho, tamanho), fill=255)
-        
+
         # Aplicando a máscara circular
         img.putalpha(mask)  # Colocando a máscara circular na imagem
-        
+
         return img
     except Exception as e:
         st.error(f"Erro ao carregar a imagem: {e}")
-        return None
-
-# Função para converter imagem para base64
-def imagem_para_base64(caminho_imagem):
-    try:
-        with open(caminho_imagem, "rb") as img_file:
-            return base64.b64encode(img_file.read()).decode("utf-8")
-    except Exception as e:
-        st.error(f"Erro ao converter a imagem para base64: {e}")
         return None
 
 # Função para exibir os dados pessoais
@@ -44,7 +34,7 @@ def exibir_dados_pessoais():
     Idade: 24 anos  
     Nacionalidade: Brasileiro  
     Estado Civil: Solteiro  
-    
+
     **Endereço**: Rua São José do Rio Preto, Parque Gramado II, Araraquara - SP  
     **Telefones**: (16) 99786-3751 / (16) 99628-4711  
     **E-mail**: [guisant1003@gmail.com](mailto:guisant1003@gmail.com)  
@@ -54,7 +44,7 @@ def exibir_dados_pessoais():
 # Função para exibir o currículo
 def exibir_curriculo():
     st.title("Currículo Profissional")
-    
+
     # Resumo das qualificações
     st.header("Resumo das Qualificações")
     st.write("""
@@ -127,27 +117,20 @@ def exibir_experiencia():
 
 # Função principal
 def main():
-    # Carregar imagem de fundo como base64
-    try:
-        bg_image_base64 = imagem_para_base64("fotomenu.jpg")
-        if bg_image_base64:
-            # Aplicando a imagem como background da página
-            st.markdown(
-                f"""
-                <style>
-                .reportview-container {{
-                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    min-height: 100vh;
-                }}
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-    except Exception as e:
-        st.error("Erro ao carregar a imagem de fundo da página.")
+    # Adicionar imagem de fundo
+    background_image = "fotomenu.jpg"
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url('{background_image}');
+            background-size: cover;
+            background-position: center;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
