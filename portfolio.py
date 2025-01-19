@@ -125,10 +125,10 @@ def exibir_experiencia():
       - Apoio com suprimentos, materiais e organização de documentos.  
     """)
 
-# Função para carregar a imagem de fundo
-def aplicar_imagem_fundo():
+# Função principal
+def main():
+    # Carregar imagem de fundo como base64
     try:
-        # Carregar a imagem de fundo como base64
         bg_image_base64 = imagem_para_base64("fotomenu.jpg")
         if bg_image_base64:
             # Aplicando a imagem como background da página
@@ -147,12 +147,7 @@ def aplicar_imagem_fundo():
                 unsafe_allow_html=True
             )
     except Exception as e:
-        st.error(f"Erro ao carregar a imagem de fundo: {e}")
-
-# Função principal
-def main():
-    # Aplica a imagem de fundo na página inteira
-    aplicar_imagem_fundo()
+        st.error("Erro ao carregar a imagem de fundo da página.")
 
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
