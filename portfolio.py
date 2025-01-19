@@ -42,11 +42,11 @@ def main():
     try:
         bg_image_base64 = imagem_para_base64("fotomenu.jpg")
         if bg_image_base64:
-            # Definindo o background com a imagem em base64
+            # Aplicando a imagem como background da página
             st.markdown(
                 f"""
                 <style>
-                body {{
+                .reportview-container {{
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
