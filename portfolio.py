@@ -39,7 +39,7 @@ def imagem_para_base64(caminho_imagem):
 # Função para adicionar a imagem de fundo ao layout
 def adicionar_fundo():
     try:
-        # Fundo para a tela principal
+        # Fundo para a página principal
         bg_image_base64 = imagem_para_base64("fotoprincipal.jpg")
         if bg_image_base64:
             st.markdown(
@@ -49,7 +49,7 @@ def adicionar_fundo():
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
-                    background-position: center;
+                    background-position: center center;
                     height: 100vh;
                     margin: 0;
                     padding: 0;
@@ -69,7 +69,7 @@ def adicionar_fundo():
                     background-image: url("data:image/jpeg;base64,{bg_sidebar_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
-                    background-position: center;
+                    background-position: center center;
                 }}
                 </style>
                 """,
