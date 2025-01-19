@@ -50,8 +50,10 @@ def main():
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
-                    height: 100vh;
                     margin: 0;
+                    padding: 0;
+                    height: 100vh;
+                    overflow: hidden;
                 }}
                 </style>
                 """,
