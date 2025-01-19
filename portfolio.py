@@ -67,10 +67,10 @@ def main():
                 <style>
                 body {{
                     background-image: url("data:image/jpeg;base64,{main_bg_image_base64}");
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    height: 100vh; /* Garantir que ocupe toda a altura da tela */
+                    background-size: cover !important;
+                    background-repeat: no-repeat !important;
+                    background-position: center !important;
+                    height: 100vh;
                     margin: 0;
                 }}
                 </style>
