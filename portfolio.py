@@ -78,6 +78,27 @@ def main():
     except Exception as e:
         st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
 
+    # Adiciona a imagem de fundo à barra superior
+    try:
+        bg_topbar_base64 = imagem_para_base64("barra_superior.jpg")  # Substitua pelo caminho correto da imagem
+        if bg_topbar_base64:
+            st.markdown(
+                f"""
+                <style>
+                header {{
+                    background-image: url("data:image/jpeg;base64,{bg_topbar_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    color: white;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.error("Erro ao carregar a imagem de fundo da barra superior.")
+
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
     if img:
