@@ -6,28 +6,28 @@ import base64
 def recorte_imagem_redonda(imagem_path):
     try:
         img = Image.open(imagem_path)
-
+        
         # Garantindo que a imagem seja quadrada (tomando o menor lado)
         largura, altura = img.size
         tamanho = min(largura, altura)  # Pegamos o menor valor entre largura e altura para garantir o formato circular
 
         # Redimensionando a imagem para ser quadrada
         img = img.crop(((largura - tamanho) // 2, (altura - tamanho) // 2, (largura + tamanho) // 2, (altura + tamanho) // 2))
-
+        
         # Criando uma máscara circular
         mask = Image.new('L', (tamanho, tamanho), 0)
         draw = ImageDraw.Draw(mask)
         draw.ellipse((0, 0, tamanho, tamanho), fill=255)
-
+        
         # Aplicando a máscara circular
         img.putalpha(mask)  # Colocando a máscara circular na imagem
-
+        
         return img
     except Exception as e:
         st.error(f"Erro ao carregar a imagem: {e}")
         return None
 
-# Função para converter uma imagem para base64
+# Função para converter imagem para base64
 def imagem_para_base64(caminho_imagem):
     try:
         with open(caminho_imagem, "rb") as img_file:
@@ -35,53 +35,6 @@ def imagem_para_base64(caminho_imagem):
     except Exception as e:
         st.error(f"Erro ao converter a imagem para base64: {e}")
         return None
-
-# Função principal
-def main():
-    # Carregar a imagem de fundo como base64
-    try:
-        bg_image_base64 = imagem_para_base64("fotomenu.jpg")
-        if bg_image_base64:
-            # Aplicando a imagem como background da página
-            st.markdown(
-                f"""
-                <style>
-                .reportview-container {{
-                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    min-height: 100vh;
-                }}
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-    except Exception as e:
-        st.error("Erro ao carregar a imagem de fundo da página.")
-
-    # Exibe a imagem com recorte redondo na barra lateral
-    img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
-    if img:
-        st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
-
-    # Menu lateral para navegação
-    st.sidebar.title("Menu de Navegação")
-    menu = st.sidebar.radio("Escolha uma seção", ("Dados Pessoais", "Currículo", "Objetivo", "Formação", "Conhecimentos", "Experiência"))
-
-    # Exibe a seção de acordo com a escolha do menu
-    if menu == "Dados Pessoais":
-        exibir_dados_pessoais()
-    elif menu == "Currículo":
-        exibir_curriculo()
-    elif menu == "Objetivo":
-        exibir_objetivo()
-    elif menu == "Formação":
-        exibir_formacao()
-    elif menu == "Conhecimentos":
-        exibir_conhecimentos()
-    elif menu == "Experiência":
-        exibir_experiencia()
 
 # Função para exibir os dados pessoais
 def exibir_dados_pessoais():
@@ -91,7 +44,7 @@ def exibir_dados_pessoais():
     Idade: 24 anos  
     Nacionalidade: Brasileiro  
     Estado Civil: Solteiro  
-
+    
     **Endereço**: Rua São José do Rio Preto, Parque Gramado II, Araraquara - SP  
     **Telefones**: (16) 99786-3751 / (16) 99628-4711  
     **E-mail**: [guisant1003@gmail.com](mailto:guisant1003@gmail.com)  
@@ -101,7 +54,7 @@ def exibir_dados_pessoais():
 # Função para exibir o currículo
 def exibir_curriculo():
     st.title("Currículo Profissional")
-
+    
     # Resumo das qualificações
     st.header("Resumo das Qualificações")
     st.write("""
@@ -171,6 +124,58 @@ def exibir_experiencia():
       - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.  
       - Apoio com suprimentos, materiais e organização de documentos.  
     """)
+
+# Função para carregar a imagem de fundo
+def aplicar_imagem_fundo():
+    try:
+        # Carregar a imagem de fundo como base64
+        bg_image_base64 = imagem_para_base64("fotomenu.jpg")
+        if bg_image_base64:
+            # Aplicando a imagem como background da página
+            st.markdown(
+                f"""
+                <style>
+                .reportview-container {{
+                    background-image: url("data:image/jpeg;base64,{bg_image_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    min-height: 100vh;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.error(f"Erro ao carregar a imagem de fundo: {e}")
+
+# Função principal
+def main():
+    # Aplica a imagem de fundo na página inteira
+    aplicar_imagem_fundo()
+
+    # Exibe a imagem uma vez, na parte superior da barra lateral
+    img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
+    if img:
+        st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
+
+    # Menu lateral para navegação
+    st.sidebar.title("Menu de Navegação")
+    menu = st.sidebar.radio("Escolha uma seção", ("Dados Pessoais", "Currículo", "Objetivo", "Formação", "Conhecimentos", "Experiência"))
+
+    # Exibe a seção de acordo com a escolha do menu
+    if menu == "Dados Pessoais":
+        exibir_dados_pessoais()
+    elif menu == "Currículo":
+        exibir_curriculo()
+    elif menu == "Objetivo":
+        exibir_objetivo()
+    elif menu == "Formação":
+        exibir_formacao()
+    elif menu == "Conhecimentos":
+        exibir_conhecimentos()
+    elif menu == "Experiência":
+        exibir_experiencia()
 
 # Executando o aplicativo
 if __name__ == "__main__":
