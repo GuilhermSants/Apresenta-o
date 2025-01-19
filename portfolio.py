@@ -45,34 +45,6 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
-    # Adiciona a imagem de fundo ao menu lateral
-    bg_image_base64 = imagem_para_base64("fotomenu.jpg")
-    if bg_image_base64:
-        st.markdown(
-            f"""
-            <style>
-            [data-testid="stSidebar"] {{
-                background-image: url("data:image/jpeg;base64,{bg_image_base64}");
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-            }}
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.sidebar.markdown(
-            """
-            <style>
-            [data-testid="stSidebar"] {{
-                background-color: #f0f0f0; /* Cor de fundo padrão */
-            }}
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
     # Adiciona a imagem de fundo à tela principal
     main_bg_image_base64 = imagem_para_base64("fotoprincipal.jpg")
     if main_bg_image_base64:
@@ -86,6 +58,7 @@ def main():
                 background-position: center !important;
                 height: 100vh;
                 margin: 0;
+                color: white;  /* Ajuste de cor para contraste */
             }}
             </style>
             """,
@@ -104,11 +77,6 @@ def main():
             """,
             unsafe_allow_html=True
         )
-
-    # Exibe a imagem uma vez, na parte superior da barra lateral
-    img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
-    if img:
-        st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
 
     # Menu lateral para navegação
     st.sidebar.title("Menu de Navegação")
