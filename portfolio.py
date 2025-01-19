@@ -40,7 +40,7 @@ def imagem_para_base64(caminho_imagem):
 def main():
     # Adiciona a imagem de fundo à tela principal
     try:
-        bg_image_base64 = imagem_para_base64("fotomenu.jpg")  # Substitua com o caminho correto da imagem
+        bg_image_base64 = imagem_para_base64("fundo_principal.jpg")  # Substitua com o caminho correto da imagem
         if bg_image_base64:
             st.markdown(
                 f"""
