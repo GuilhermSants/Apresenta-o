@@ -123,12 +123,12 @@ def exibir_curriculo():
     # Resumo das qualificações
     st.header("Resumo das Qualificações")
     st.write("""
-    **Engenheiro Civil** com forte experiência na execução e gerenciamento de projetos estruturais. 
-    Especializado na utilização de ferramentas de ponta como **Revit**, **Dynamo para Revit** e **Python**, 
+    **Engenheiro Civil** com forte experiência na execução e gerenciamento de projetos. 
+    Especializado na utilização de ferramentas como **Revit**, **Dynamo para Revit** e **Python**, 
     que permitem otimizar o desenvolvimento de projetos e automação de processos construtivos. 
 
     Profundo conhecimento em **modelagem paramétrica** e **automação de fluxos de trabalho** utilizando o **Dynamo para Revit**. 
-    Além disso, sou capaz de integrar soluções digitais com **Python** para aumentar a eficiência e precisão no gerenciamento de dados e cálculos estruturais. 
+    Além disso, sou capaz de integrar soluções digitais com **Python** para aumentar a eficiência e precisão no gerenciamento de dados, cálculos estruturais, e atividades do cotidiano. 
     Com experiência prática na execução de obras, busco aplicar minhas habilidades para impulsionar projetos sustentáveis e inovadores no setor de engenharia civil.
     """)
 
