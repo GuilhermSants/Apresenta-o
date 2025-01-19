@@ -38,6 +38,30 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
+    # Adiciona a imagem de fundo à barra superior
+    try:
+        top_bar_image_base64 = imagem_para_base64("barra_superior.jpg")  # Substitua pelo caminho correto da imagem
+        if top_bar_image_base64:
+            st.markdown(
+                f"""
+                <style>
+                div.block-container {{
+                    padding-top: 80px; /* Ajuste para evitar sobreposição de conteúdo */
+                }}
+                div[data-testid="stHeader"] {{
+                    background-image: url("data:image/jpeg;base64,{top_bar_image_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    height: 80px; /* Ajuste a altura conforme necessário */
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.error("Erro ao carregar a imagem de fundo da barra superior.")
+
     # Adiciona a imagem de fundo à tela principal
     try:
         bg_image_base64 = imagem_para_base64("fundo_principal.jpg")  # Substitua com o caminho correto da imagem
@@ -77,30 +101,6 @@ def main():
             )
     except Exception as e:
         st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
-
-    # Adiciona a imagem de fundo à barra superior
-    try:
-        top_bar_image_base64 = imagem_para_base64("barra_superior.jpg")  # Substitua pelo caminho correto da imagem
-        if top_bar_image_base64:
-            st.markdown(
-                f"""
-                <style>
-                header {{ 
-                    background-image: url("data:image/jpeg;base64,{top_bar_image_base64}");
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    height: 80px; /* Ajuste a altura conforme necessário */
-                }}
-                header > div:first-child {{
-                    display: none; /* Oculta o título padrão do Streamlit na barra superior */
-                }}
-                </style>
-                """,
-                unsafe_allow_html=True
-            )
-    except Exception as e:
-        st.error("Erro ao carregar a imagem de fundo da barra superior.")
 
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
@@ -143,37 +143,75 @@ def exibir_dados_pessoais():
 # Função para exibir o currículo
 def exibir_curriculo():
     st.title("Currículo Profissional")
+
+    # Resumo das qualificações
     st.header("Resumo das Qualificações")
     st.write("""
-    **Engenheiro Civil** com forte experiência na execução e gerenciamento de projetos estruturais.
+    **Engenheiro Civil** com forte experiência na execução e gerenciamento de projetos estruturais. 
+    Especializado na utilização de ferramentas de ponta como **Revit**, **Dynamo para Revit** e **Python**, 
+    que permitem otimizar o desenvolvimento de projetos e automação de processos construtivos. 
+
+    Profundo conhecimento em **modelagem paramétrica** e **automação de fluxos de trabalho** utilizando o **Dynamo para Revit**. 
+    Além disso, sou capaz de integrar soluções digitais com **Python** para aumentar a eficiência e precisão no gerenciamento de dados e cálculos estruturais. 
+    Com experiência prática na execução de obras, busco aplicar minhas habilidades para impulsionar projetos sustentáveis e inovadores no setor de engenharia civil.
     """)
 
 # Função para exibir o objetivo
 def exibir_objetivo():
     st.title("Objetivo Profissional")
     st.write("""
-    Buscar novas oportunidades de desenvolvimento e implementação de soluções tecnológicas no setor de engenharia civil.
+    Buscar novas oportunidades de **desenvolvimento e implementação de soluções tecnológicas** no setor de **engenharia civil**, 
+    com foco em **automação de processos** e **inovação**. Meu objetivo é liderar projetos que integrem as tecnologias de **Revit**, **Dynamo** e **Python** 
+    para otimizar a **modelagem de informações de construção (BIM)**, possibilitando a criação de **projetos sustentáveis**, 
+    **eficientes** e **altamente automatizados**, proporcionando ganhos em **tempo** e **precisão**.
     """)
 
 # Função para exibir a formação
 def exibir_formacao():
     st.title("Formação Acadêmica")
     st.write("""
-    - **Dynamo para Revit** – **NeuroBIM** (Término previsto Fev/2025)
+    - **Dynamo para Revit** – **NeuroBIM** (Término previsto Fev/2025) :star: *Especialização em automação de fluxos de trabalho no Revit com Dynamo.*
+    - **Programação em Python** – **SENAI** (2024) :star: *Curso de introdução e base ao desenvolvimento das linhas de códigos e interpretação.*
+    - **Pós-Graduação** em **Gestão de Projetos Sustentáveis de Edificações** – **Faculdade Alphaville** (2023)
+    - **Graduação** em **Engenharia Civil** – **Universidade Paulista (UNIP)** (2022)
+    - **Curso de AutoCAD (2D/3D)** – **UNIARA QUALIFICA** (2021)
     """)
 
 # Função para exibir os conhecimentos
 def exibir_conhecimentos():
     st.title("Conhecimentos e Habilidades")
     st.write("""
-    - **Revit**: Profundo domínio em modelagem e planejamento de projetos estruturais.
+    - **Revit**: Profundo domínio em **modelagem** e **planejamento** de projetos estruturais, com ênfase em **BIM** e **coordenação de projetos**.
+    - **Dynamo para Revit**: Criação de scripts para automação de tarefas, como **parametrização**, **otimização de processos** e **gerenciamento de dados** no Revit.
+    - **Python**: Desenvolvimento de **scripts** para automação de cálculos estruturais, integração de **dados** e controle de **fluxos de trabalho**.
+    - **AutoCAD / STRAP / Ftool**: Conhecimento avançado em **detalhamento estrutural** e **cálculos** com ferramentas especializadas.
+    - **Inventor**: Conhecimento básico na modelagem e usabilidade do software.
+    - **Produção em Campo**: Experiência prática em **acompanhamento de obras**, **execução de projetos** e **gestão de processos construtivos**.
+    - **Idiomas**: Inglês básico (habilidade para leitura e compreensão de textos).
     """)
 
 # Função para exibir a experiência profissional
 def exibir_experiencia():
     st.title("Experiência Profissional")
     st.markdown("""
-    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)
+    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (04/2022 – Atual)  
+    - **Cargo**: Projetista Pleno  
+      - Modelagem paramétrica no **Revit**, concepção e manutenção.
+      - Desenvolvimento de rotinas de automação para **Revit** utilizando o **Dynamo**.       
+      - Realização de detalhamento de peças pré-fabricadas com **AutoCAD**, **Revit** e planilhas **Excel**.
+      - Realização de cálculos e verificações com **STRAP**, **Ftool** e **AutoCAD (AutoLISP)**.  
+      - Acompanhamento de execução em campo, plotagem de projetos e solução de dúvidas de execução.  
+
+    **USICON CONSTRUÇÕES PRÉ-FABRICADAS LTDA** (10/2020 – 04/2022)  
+    - **Cargo**: Estagiário  
+      - Elaboração de projetos de **estruturas pré-fabricadas** e plotagens.  
+      - Acompanhamento de obras e visita à fábrica para conhecimento dos sistemas construtivos.  
+      - Aperfeiçoamento no uso do software **Revit**.  
+
+    **HM ENGENHARIA** (01/2020 – 10/2020)  
+    - **Cargo**: Estagiário  
+      - Levantamento de produção em campo, preenchimento de formulários e planilhas de controle.  
+      - Apoio com suprimentos, materiais e organização de documentos.  
     """)
 
 # Executando o aplicativo
