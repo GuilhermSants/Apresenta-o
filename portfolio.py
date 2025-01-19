@@ -58,9 +58,9 @@ def main():
     except Exception as e:
         st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
 
-    # Adiciona a imagem de fundo da tela principal
+    # Adiciona a imagem de fundo à tela principal (seção)
     try:
-        bg_image_base64_main = imagem_para_base64("fotoprincipal.jpg")  # Verifique o caminho da imagem
+        bg_image_base64_main = imagem_para_base64("fotoprincipal.jpg")
         if bg_image_base64_main:
             st.markdown(
                 f"""
