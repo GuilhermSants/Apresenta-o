@@ -38,25 +38,27 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
-    # Adiciona a imagem de fundo ao menu lateral
+    # Adiciona a imagem de fundo à página inteira
     try:
         bg_image_base64 = imagem_para_base64("fotomenu.jpg")
         if bg_image_base64:
             st.markdown(
                 f"""
                 <style>
-                [data-testid="stSidebar"] {{
+                body {{
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
+                    height: 100vh;
+                    margin: 0;
                 }}
                 </style>
                 """,
                 unsafe_allow_html=True
             )
     except Exception as e:
-        st.sidebar.error("Erro ao carregar a imagem de fundo do menu.")
+        st.error("Erro ao carregar a imagem de fundo da página.")
 
     # Exibe a imagem uma vez, na parte superior da barra lateral
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
