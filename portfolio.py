@@ -32,6 +32,9 @@ def imagem_para_base64(caminho_imagem):
     try:
         with open(caminho_imagem, "rb") as img_file:
             return base64.b64encode(img_file.read()).decode("utf-8")
+    except FileNotFoundError:
+        st.error(f"Imagem não encontrada: {caminho_imagem}")
+        return None
     except Exception as e:
         st.error(f"Erro ao converter a imagem para base64: {e}")
         return None
@@ -70,6 +73,19 @@ def main():
                     background-size: cover !important;
                     background-repeat: no-repeat !important;
                     background-position: center !important;
+                    height: 100vh;
+                    margin: 0;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                f"""
+                <style>
+                body {{
+                    background-color: #f0f0f0;  /* Cor de fundo padrão */
                     height: 100vh;
                     margin: 0;
                 }}
