@@ -70,6 +70,8 @@ def main():
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
+                    height: 100vh; /* Garantir que ocupe toda a altura da tela */
+                    margin: 0;
                 }}
                 </style>
                 """,
