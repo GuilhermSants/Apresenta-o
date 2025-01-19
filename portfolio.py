@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageDraw
 import base64
 
 # Função para criar a imagem com bordas arredondadas (círculo perfeito)
@@ -9,7 +9,7 @@ def recorte_imagem_redonda(imagem_path):
 
         # Garantindo que a imagem seja quadrada (tomando o menor lado)
         largura, altura = img.size
-        tamanho = min(largura, altura)  # Pegamos o menor valor entre largura e altura para garantir o formato circular
+        tamanho = min(largura, altura)
 
         # Redimensionando a imagem para ser quadrada
         img = img.crop(((largura - tamanho) // 2, (altura - tamanho) // 2, (largura + tamanho) // 2, (altura + tamanho) // 2))
@@ -20,7 +20,7 @@ def recorte_imagem_redonda(imagem_path):
         draw.ellipse((0, 0, tamanho, tamanho), fill=255)
 
         # Aplicando a máscara circular
-        img.putalpha(mask)  # Colocando a máscara circular na imagem
+        img.putalpha(mask)
 
         return img
     except Exception as e:
@@ -38,15 +38,35 @@ def imagem_para_base64(caminho_imagem):
 
 # Função principal
 def main():
-    # Adiciona a imagem de fundo ao menu lateral
+    # Adiciona a imagem de fundo à tela principal
     try:
-        bg_image_base64 = imagem_para_base64("fotomenu.jpg")
+        bg_image_base64 = imagem_para_base64("fundo_principal.jpg")  # Substitua com o caminho correto da imagem
         if bg_image_base64:
             st.markdown(
                 f"""
                 <style>
-                [data-testid="stSidebar"] {{
+                .stApp {{
                     background-image: url("data:image/jpeg;base64,{bg_image_base64}");
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+    except Exception as e:
+        st.error("Erro ao carregar a imagem de fundo da tela principal.")
+
+    # Adiciona a imagem de fundo ao menu lateral
+    try:
+        bg_sidebar_base64 = imagem_para_base64("fotomenu.jpg")
+        if bg_sidebar_base64:
+            st.markdown(
+                f"""
+                <style>
+                [data-testid="stSidebar"] {{
+                    background-image: url("data:image/jpeg;base64,{bg_sidebar_base64}");
                     background-size: cover;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -62,10 +82,6 @@ def main():
     img = recorte_imagem_redonda("portfolio.jpg")  # Substitua com o caminho correto da imagem
     if img:
         st.sidebar.image(img, width=200)  # Exibe a imagem com recorte redondo na barra lateral no topo
-
-    # Adiciona a imagem ao topo da tela principal
-    if img:
-        st.image(img, width=200)  # Exibe a mesma imagem no topo da tela principal
 
     # Menu lateral para navegação
     st.sidebar.title("Menu de Navegação")
